@@ -22,7 +22,7 @@ class _OnBoardState extends State<OnBoard> {
   List<Map<String, dynamic>> sliderList = [
     {"title": "school manager",
       "description": "People managing what kind of surveys that will be put up. ",
-      "icon": "images/school-manager.jpg",
+      "icon": "images/school-manager.png",
     },
     {"title": "student",
       "description": "Students are the ones doing the surveys for the app",
@@ -30,7 +30,7 @@ class _OnBoardState extends State<OnBoard> {
     },
     {"title": "family",
       "description": "Family members are the ones seeing the various food options available",
-      "icon": "family.jpg",
+      "icon": "images/family.jpg",
     },
   ];
 
