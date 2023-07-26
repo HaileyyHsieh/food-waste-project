@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_waste_proj_v1/screen/widgets/constant.dart';
 
-// import 'onboard.dart';
+import 'onboard.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,11 +18,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> init() async {
-    // await Future.delayed(const Duration(seconds: 2)).then((value) =>
-    //     Navigator.push(
-    //         context,
-    //         MaterialPageRoute(
-    //             builder: (BuildContext context) => const OnBoard())));
+    await Future.delayed(const Duration(seconds: 2)).then((value) =>
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const OnBoard())));
   }
 
   @override

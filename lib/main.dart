@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_waste_proj_v1/screen/splashscreen/mt_splash_screen.dart';
+import 'package:food_waste_proj_v1/screen/splash_screen/mt_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {

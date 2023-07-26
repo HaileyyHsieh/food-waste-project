@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:482599094144:android:ae9ea6024c0f3591c3e365",
+        "android_client_info": {
+          "package_name": "com.foodwaste.food_waste_proj_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482599094144-04vmoed900uqpokbsamfd7itbejqev0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsg9v-eviD1zgtkLt-B5ddzB1HabTiAkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482599094144-04vmoed900uqpokbsamfd7itbejqev0r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:482599094144:android:f1865b3f4996d1cac3e365",
         "android_client_info": {
           "package_name": "test.package"

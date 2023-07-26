@@ -21,15 +21,47 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("AppBar"),
+          title: Image.asset('images/food_waste_icon.png'),
           backgroundColor: Colors.white,
           centerTitle: true,
         ),
         body: Column(
           children: [
-            Text("title"),
+            Text("Join as student, manager, or family"),
             Card(
               child: RadioListTile(
+                title: const Text('Student'),
+                value: Character.student,
+                groupValue: _character,
+                onChanged: (Character? value) {
+                  setState(() {
+                    _character = value;
+                  });
+                },
+              ),
+            ),
+            Card(
+              child: RadioListTile(
+                title: const Text('Family'),
+                value: Character.family,
+                groupValue: _character,
+                onChanged: (Character? value) {
+                  setState(() {
+                    _character = value;
+                  });
+                },
+              ),
+            ),
+            Card(
+              child: RadioListTile(
+                title: const Text('Manager'),
+                value: Character.manager,
+                groupValue: _character,
+                onChanged: (Character? value) {
+                  setState(() {
+                    _character = value;
+                  });
+                },
               ),
             ),
           ],
