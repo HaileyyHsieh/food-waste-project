@@ -26,11 +26,11 @@ class _OnBoardState extends State<OnBoard> {
     },
     {"title": "student",
       "description": "Students are the ones doing the surveys for the app",
-      "icon": "images/student.jpg",
+      "icon": "images/student.png",
     },
     {"title": "family",
       "description": "Family members are the ones seeing the various food options available",
-      "icon": "images/family.jpg",
+      "icon": "images/family.png",
     },
   ];
 
@@ -117,7 +117,7 @@ class _OnBoardState extends State<OnBoard> {
                                           const Duration(microseconds: 3000),
                                       curve: Curves.bounceInOut)
                                   :
-                                  Text("");
+                                  // Text("");
                               Navigator.push(
                                       context,
                                       MaterialPageRoute(

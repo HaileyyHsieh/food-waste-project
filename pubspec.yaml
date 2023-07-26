@@ -79,9 +79,9 @@ flutter:
   assets:
     - images/food_waste_icon.png
     - images/arrow.jpg
-    - images/family.jpg
+    - images/family.png
     - images/school-manager.png
-    - images/student.jpg
+    - images/student.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
