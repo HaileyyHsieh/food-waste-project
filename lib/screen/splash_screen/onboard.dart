@@ -21,15 +21,15 @@ class _OnBoardState extends State<OnBoard> {
 
   List<Map<String, dynamic>> sliderList = [
     {"title": "school manager",
-      "description": "People managing what kind of surveys that will be put up. ",
+      "description": "Keep track of food that is not sold every day in school restaurant, as a standard for purchasing",
       "icon": "images/school-manager.png",
     },
     {"title": "student",
-      "description": "Students are the ones doing the surveys for the app",
+      "description": "Fill in the menu survey every week to know your preference as the standard for prepare food",
       "icon": "images/student.png",
     },
     {"title": "family",
-      "description": "Family members are the ones seeing the various food options available",
+      "description": "Inquire, register and request the food that is not sold on the day",
       "icon": "images/family.png",
     },
   ];
@@ -129,11 +129,11 @@ class _OnBoardState extends State<OnBoard> {
                           );
                         },
                         child: Container(
-                          height: 100,
-                          width: 100,
+                          height: 80,
+                          width: 80,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('images/arrow.jpg'), // clickable image, go on to the next page
+                              image: AssetImage('images/arrow.png'), // clickable image, go on to the next page
                             ),
                           ),
                         ),
