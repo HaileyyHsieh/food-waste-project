@@ -3,7 +3,7 @@ import 'package:food_waste_proj_v1/screen/widgets/constant.dart';
 import '../widgets/button_global.dart';
 import 'login.dart';
 import 'signup.dart';
-import '../widgets/constant.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -30,22 +30,38 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           toolbarHeight: 150,
           backgroundColor: kPrimaryColor,
           centerTitle: true,
+          automaticallyImplyLeading: false,
         ),
         body: Column(
           children: [
+            const SizedBox(height: 10),
             Text(
               "Join as student, manager, or family",
               style: TextStyle(fontSize: 20),
             ),
+            const SizedBox(height: 10),
             Card(
               child: RadioListTile(
                 title: const Text('Student'),
                 subtitle: Text("Students are the ones doing the surveys for the app"),
+                secondary: Container(
+                  width: 45,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('images/student.jpg'),
+                    )
+                  ),
+                ),
                 value: Character.student,
                 groupValue: _character,
                 onChanged: (Character? value) {
                   setState(() {
                     _character = value;
+                    isStudent = true;
+                    isFamily = false;
+                    isManager = false;
                   });
                 },
               ),
@@ -56,6 +72,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 subtitle: Text("Family members are the ones seeing the various food options available"),
                 value: Character.family,
                 groupValue: _character,
+                secondary: Container(
+                  width: 45,
+                  height: 45,
+                  decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('images/family.jpg'),
+                      )
+                  ),
+                ),
                 onChanged: (Character? value) {
                   setState(() {
                     _character = value;
@@ -72,9 +98,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 subtitle: Text("People managing what kind of surveys that will be put up. "),
                 value: Character.manager,
                 groupValue: _character,
+
+                secondary: Container(
+                  width: 45,
+                  height: 45,
+                  decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('images/school-manager.png'),
+                      )
+                  ),
+                ),
                 onChanged: (Character? value) {
                   setState(() {
                     _character = value;
+                    isManager = true;
+                    isStudent = false;
+                    isFamily = false;
                   });
                 },
               ),
