@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_waste_proj_v1/screen/widgets/constant.dart';
 import '../widgets/button_global.dart';
 import 'login.dart';
-import 'signup.dart';
+// import 'signup.dart';
 
 
 class WelcomeScreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   decoration: BoxDecoration(
                     image: const DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('images/student.jpg'),
+                        image: AssetImage('images/student.png'),
                     )
                   ),
                 ),
@@ -78,7 +78,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   decoration: BoxDecoration(
                       image: const DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('images/family.jpg'),
+                        image: AssetImage('images/family.png'),
                       )
                   ),
                 ),
