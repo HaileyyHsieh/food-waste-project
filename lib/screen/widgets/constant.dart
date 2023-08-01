@@ -6,6 +6,7 @@ const kPrimaryColor = Color(0xFF9CD06E);
 const kNeutralColor = Color(0xFF121F3E);
 const kSubTitleColor = Color(0xFF4F5350);
 const kLightNeutralColor = Color(0xFF8E8E8E);
+const kLightGrayColor = Color(0xFFB6B6B6);
 const kDarkWhite = Color(0xFFF6F6F6);
 const kWhite = Color(0xFFFFFFFF);
 const kBorderColorTextField = Color(0xFFE3E3E3);

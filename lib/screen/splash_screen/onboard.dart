@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../welcome_screen/signup.dart';
+
 import '../welcome_screen/welcome_screen.dart';
 import '../widgets/constant.dart';
 
