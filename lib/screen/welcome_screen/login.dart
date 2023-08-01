@@ -52,7 +52,7 @@ class _LogInState extends State<LogIn> {
             height: 100,
             width: 100,
           ),
-          toolbarHeight: 200,
+          toolbarHeight: 180,
           backgroundColor: kPrimaryColor,
           centerTitle: true,
           automaticallyImplyLeading: false,
@@ -70,6 +70,15 @@ class _LogInState extends State<LogIn> {
               child: Column(
                 children: [
                   const SizedBox(height: 10.0),
+                  Text(
+                    "Log In",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(height: 15.0),
                   TextFormField (
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -102,6 +111,7 @@ class _LogInState extends State<LogIn> {
                         )
                     ),
                   ),
+                  const SizedBox(height: 10.0),
                   ButtonGlobalWithoutIcon(
                     buttontext: "Log In",
                     buttonDecoration: kButtonDecoration.copyWith(
@@ -131,6 +141,7 @@ class _LogInState extends State<LogIn> {
                     },
                     buttonTextColor: kNeutralColor,
                   ),
+                  const SizedBox(height: 10.0),
                   Center(
                     child: GestureDetector(
                       onTap: () => const SignUp().launch(context),
@@ -142,7 +153,7 @@ class _LogInState extends State<LogIn> {
                             TextSpan(
                               text: 'Sign Up',
                               style: kTextStyle.copyWith(
-                                  color: kPrimaryColor,
+                                  color: const Color(0xFF69B22A),
                                   fontWeight: FontWeight.bold),
                             ),
                           ],

@@ -67,7 +67,7 @@ class _SignUpState extends State<SignUp> {
             height: 100,
             width: 100,
           ),
-          toolbarHeight: 200,
+          toolbarHeight: 180,
           backgroundColor: kPrimaryColor,
           centerTitle: true,
           automaticallyImplyLeading: false,
@@ -78,21 +78,20 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
         ),
-
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                // Text(
-                //   "Sign Up",
-                //   textAlign: TextAlign.center,
-                //   style: const TextStyle(
-                //     fontWeight: FontWeight.bold,
-                //     fontSize: 30,
-                //   ),
-                // ),
+                Text(
+                  "Sign Up",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
+                ),
                 const SizedBox(height: 15.0),
                 TextFormField (
                   controller: _firstNameController,
@@ -160,16 +159,6 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 const SizedBox(height: 10.0),
-                // TextFormField (
-                //   textInputAction: TextInputAction.next,
-                //   obscureText: true,
-                //   decoration: InputDecoration(
-                //       border: const OutlineInputBorder(),
-                //       labelText: 'Confirm Password',
-                //       hintText: 'Re-enter your password'
-                //   ),
-                // ),
-                // const SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -217,7 +206,6 @@ class _SignUpState extends State<SignUp> {
                     ).then(
                       (result) {
                         if (result == null) {
-                          // _getData();
                           editUserInfo(_getData());
                           _navigateTo();
                         }
@@ -245,8 +233,8 @@ class _SignUpState extends State<SignUp> {
                           TextSpan(
                             text: 'Log In',
                             style: kTextStyle.copyWith(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.bold),
+                                color: const Color(0xFF69B22A),
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),

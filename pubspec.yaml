@@ -82,6 +82,9 @@ flutter:
     - images/family.png
     - images/school-manager.png
     - images/student.png
+    - images/profile1.png
+    - images/profile2.png
+    - images/profile3.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
