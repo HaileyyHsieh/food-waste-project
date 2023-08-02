@@ -4,7 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../firebase/authentication.dart';
 // import '../family_screen/family_home/family_home.dart';
-// import '../manager_screen/manager_home/manager_home.dart';
+import '../manager_screen/manager_home/manager_home.dart';
 // import '../student_screen/student_home.dart';
 import '../widgets/button_global.dart';
 import '../widgets/constant.dart';
@@ -24,8 +24,8 @@ class _LogInState extends State<LogIn> {
   TextEditingController _passwordController = TextEditingController();
 
   void _navigateTo() {
-    // if (isManager)
-    //   const ManagerHome().launch(context);
+    if (isManager)
+      const ManagerHome().launch(context);
     // else if (isFamily)
     //   const FamilyHome().launch(context);
     // else
