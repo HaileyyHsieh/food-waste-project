@@ -22,6 +22,9 @@ class _ManagerHomeState extends State<ManagerHome> {
     // VoteFood(),
     // DonateFood(),
     ManagerProfile(),
+    ManagerProfile(),
+    ManagerProfile(),
+    ManagerProfile(),
   ];
 
   @override
@@ -33,6 +36,13 @@ class _ManagerHomeState extends State<ManagerHome> {
       // ADD CODE HERE.....
 
       bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            _currentPage = index;
+          });
+        },
+        currentIndex: _currentPage,
+        backgroundColor: kPrimaryColor,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

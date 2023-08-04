@@ -65,18 +65,17 @@ class _ManagerProfileState extends State<ManagerProfile> {
     // 'User Information updated.'
     // ADD CODE HERE......
 
-    _addressController.text = info['address'];
-    _phoneController.text = info['phone'];
-    _nameController.text = info['name'];
+    info['address'] = _addressController.text;
+    info['phone'] = _phoneController.text;
+    info['name'] = _nameController.text;
 
     buildLoading();
     editUserInfo(info).then(
       (value){
         Navigator.of(context).pop();
+        snapBarBuilder('User Information updated');
       }
     );
-
-    snapBarBuilder('User Information updated');
   }
 
   // Loads a circular progress indicator in the center of the page
