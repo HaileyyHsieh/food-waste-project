@@ -29,21 +29,28 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
   }
 
   getData() async {
-    Map tempVoteLog = await getVote(); // gets vote document
-    List<String> tempStaticsPeriod = [];
+    // Map tempVoteLog = await getVote(); // gets vote document
+    await getVote().then((data) {
+      Map tempVoteLog = data;
 
-    tempVoteLog.forEach((date, items) { // queries through the vote doc and saves each date in tempStaticsPeriod array
-      tempStaticsPeriod.add(date);
-    });
-    print(tempStaticsPeriod);
-    setState(() {
-      staticsPeriod = tempStaticsPeriod; // list of statistics date in vote
-      staticsPeriod.sort((a, b) => b.compareTo(a));
-      if (staticsPeriod!.isNotEmpty) {
-        selectedStaticsPeriod = staticsPeriod[0]; // sets the selected statistics date
-        voteLog = tempVoteLog; // saves vote doc in voteLog
-        updateData();
-      }
+      List<String> tempStaticsPeriod = [];
+      print("tempVoteLog: $tempVoteLog");
+      tempVoteLog.forEach((date, items) { // queries through the vote doc and saves each date in tempStaticsPeriod array
+        print("date: $date");
+        print("items: $items");
+        tempStaticsPeriod.add(date);
+      });
+      print("dates");
+      print(tempStaticsPeriod);
+      setState(() {
+        staticsPeriod = tempStaticsPeriod; // list of statistics date in vote
+        staticsPeriod.sort((a, b) => b.compareTo(a));
+        if (staticsPeriod!.isNotEmpty) {
+          selectedStaticsPeriod = staticsPeriod[0]; // sets the selected statistics date
+          voteLog = tempVoteLog; // saves vote doc in voteLog
+          updateData();
+        }
+      });
     });
   }
 
@@ -96,7 +103,17 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
       backgroundColor: kDarkWhite,
       // Design app bar can you listTile widget to add leading and title properties
       appBar: AppBar(
-
+        title: Text("voting statistics"),
+        leading: Image.asset('images/school.png'),
+        centerTitle: true,
+        backgroundColor: Colors.lightBlue,
+        toolbarHeight: 100,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30.0),
+            bottomRight: Radius.circular(30.0),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 15.0),
@@ -118,11 +135,53 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
                   // and a circle chart with it's key to read the chart below (if dataMap.isNotEmpty, you will use the RecordStatistics widget
                   // from chart.dart to display the chart, else you will use a SizedBox widget and display the text 'no data'.
                   // ADD CODE HERE......
+                  Container(
+                    decoration: BoxDecoration(
+                      color: kDarkWhite,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text("voting statistics",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+
+                              child: DropdownButtonHideUnderline(
+                                child: getStatisticsPeriod(),
+                              ),
+                            ),
+                          ],
+                        ),
+                        dataMap.isNotEmpty ?
+                        RecordStatistics(dataMap:dataMap,colorList: colorList,) :
+                        SizedBox(child:Text("no data"),),
+                      ],
+                    )
+                  ),
+
 
                   // Design a container section to display the list of vote items information.
                   // Use a ListView.builder widget to display each food picture, name, and number of votes.
                   // ADD CODE HERE......
-
+                  Container(
+                    child: ListView.builder(
+                        itemCount: voteMap.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index){
+                          String key = voteMap.keys.elementAt(index);
+                          return ListTile(
+                            leading:Image.network(voteMap[key]['image']),
+                            title:Text('${voteMap[key]['item']}'),
+                            trailing:Text('${voteMap[key]['numberVote']}'),
+                          );
+                        }
+                    ),
+                  ),
                 ]),
           ),
         ),

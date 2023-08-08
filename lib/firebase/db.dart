@@ -42,6 +42,7 @@ Future<Map> getVote() async {
     }else{
       print("document doesn't exist");
     }
+    print("data:$data");
   });
   return data;
 
