@@ -92,14 +92,26 @@ class _VoteFoodState extends State<VoteFood> {
                     // function when tapped and one that calls the _imgFromGallery() function
                     // when tapped.
                     // ADD CODE HERE.......
-                    GestureDetector(
-                      onTap: () => finish(context),
+                    Row(
+                      children: [
+                        const Text("Select Image"),
+                        GestureDetector(
+                          onTap: () => finish(context),
+                          child: const Icon(Icons.cancel),
+                        ),
+                      ],
                     ),
-                    GestureDetector(
-                      onTap: () => imgFromCamera(),
-                    ),
-                    GestureDetector(
-                      onTap: () => _imgFromGallery(),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => imgFromCamera(),
+                          child: const Icon(Icons.camera_enhance_rounded),
+                        ),
+                        GestureDetector(
+                            onTap: () => _imgFromGallery(),
+                            child: const Icon(Icons.image)
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -167,13 +179,6 @@ class _VoteFoodState extends State<VoteFood> {
                         labelText: "Please type the item name",
                       )
                     ),
-                    // Container(
-                    //   decoration: new BoxDecoration(
-                    //     image: new DecorationImage(
-                    //       image: new AssetImage("images/camera"),
-                    //     )
-                    //   )
-                    // ),
                     Stack(
                       children: <Widget>[
                         imageBuilder(),
@@ -195,7 +200,7 @@ class _VoteFoodState extends State<VoteFood> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop(),
+                  Navigator.of(context).pop();
                 },
                 child: Text('Cancel'),
               ),
@@ -250,16 +255,16 @@ class _VoteFoodState extends State<VoteFood> {
           height: 100,
           width: 100,
         ),
-        toolbarHeight: 180,
+        toolbarHeight: 70,
         backgroundColor: kPrimaryColor,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30.0),
-            bottomRight: Radius.circular(30.0),
-          ),
-        ),
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.only(
+        //     bottomLeft: Radius.circular(30.0),
+        //     bottomRight: Radius.circular(30.0),
+          // ),
+        // ),
       ),
 
       body: Container(
@@ -304,10 +309,12 @@ class _VoteFoodState extends State<VoteFood> {
       // Set the floatingActionButton property to a FloatingActionButton widget and design
       // the 'Add Item' button. For the onPressed property, write '_addItemBuilder(context);'.
       // ADD CODE HERE.......
-      // floatingActionButton: FloatingActionButton(
-        // onPressed: _addItemBuilder(context);
-
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _addItemBuilder(context);
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

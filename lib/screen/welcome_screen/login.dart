@@ -10,7 +10,7 @@ import '../widgets/button_global.dart';
 import '../widgets/constant.dart';
 import '../welcome_screen/signup.dart';
 
-import '../manager_screen/manager_home/manager_home_screen.dart';
+import '../manager_screen/add_items/voteFood.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
@@ -27,10 +27,8 @@ class _LogInState extends State<LogIn> {
 
   void _navigateTo() {
     if (isManager)
-      const ManagerHome().launch(context);
-    // if (isManager)
-      const ManagerHomeScreen().launch(context);
-
+      // const ManagerHome().launch(context);
+      const VoteFood().launch(context);
     // else if (isFamily)
     //   const FamilyHome().launch(context);
     // else
