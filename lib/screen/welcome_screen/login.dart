@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../firebase/authentication.dart';
-// import '../family_screen/family_home/family_home.dart';
+import '../family_screen/family_home/family_home.dart';
 import '../manager_screen/manager_home/manager_home.dart';
 // import '../student_screen/student_home.dart';
 import '../widgets/button_global.dart';
@@ -29,8 +29,8 @@ class _LogInState extends State<LogIn> {
     if (isManager)
       // const ManagerHome().launch(context);
       const VoteFood().launch(context);
-    // else if (isFamily)
-    //   const FamilyHome().launch(context);
+    else if (isFamily)
+      const FamilyHome().launch(context);
     // else
     //   const StudentScreen().launch(context);
   }
