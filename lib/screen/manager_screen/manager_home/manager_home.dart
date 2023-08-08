@@ -42,7 +42,9 @@ class _ManagerHomeState extends State<ManagerHome> {
           });
         },
         currentIndex: _currentPage,
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kWhite,
+        selectedItemColor: kPrimaryColor,
+        unselectedItemColor: kLightGrayColor,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
