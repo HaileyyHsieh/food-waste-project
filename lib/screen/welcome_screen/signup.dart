@@ -70,7 +70,6 @@ class _SignUpState extends State<SignUp> {
           toolbarHeight: 180,
           backgroundColor: kPrimaryColor,
           centerTitle: true,
-          automaticallyImplyLeading: false,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30.0),
