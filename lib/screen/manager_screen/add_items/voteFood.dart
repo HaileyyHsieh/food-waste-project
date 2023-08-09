@@ -36,7 +36,7 @@ class _VoteFoodState extends State<VoteFood> {
     // use a setState function and check if voteLog contains the formatted date key.
     // If so, set the foodMap variable to voteLog[formatted].
     // ADD CODE HERE.....
-    Map<dynamic, dynamic> voteLog = await getVote();
+    Map voteLog = await getVote();
     setState(() {
       if(voteLog.containsKey(formatted)) {
         foodMap = voteLog[formatted];
@@ -53,7 +53,7 @@ class _VoteFoodState extends State<VoteFood> {
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(builder:
-            (BuildContext context, void Function(void Function()) setState) {
+          (BuildContext context, void Function(void Function()) setState) {
 
           // Function that opens up the camera to take a picture
           imgFromCamera() async {
@@ -174,6 +174,7 @@ class _VoteFoodState extends State<VoteFood> {
                     // showImagePopup function when tapped).
                     // ADD CODE HERE......
                     TextField(
+                      controller: itemController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Please type the item name",
@@ -184,7 +185,8 @@ class _VoteFoodState extends State<VoteFood> {
                         imageBuilder(),
                         Icon(Icons.camera_enhance_rounded),
                         GestureDetector(
-                          onTap: () => showImagePopup()
+                          onTap: () => showImagePopup(),
+                          child: Icon(Icons.camera_enhance_rounded),
                         ),
                       ]
                     )
@@ -205,7 +207,9 @@ class _VoteFoodState extends State<VoteFood> {
                 child: Text('Cancel'),
               ),
               TextButton(
-                onPressed: uploadVoteOption(image, itemController.text),
+                onPressed: () {
+                  uploadVoteOption(image, itemController.text);
+                },
                 child: Text('Add'),
               )
             ],
