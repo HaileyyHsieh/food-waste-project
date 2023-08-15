@@ -88,6 +88,7 @@ flutter:
     - images/school.png
     - images/vote.png
     - images/foodLogo.png
+    - images/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

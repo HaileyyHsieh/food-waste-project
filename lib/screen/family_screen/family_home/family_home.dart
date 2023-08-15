@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:food_waste_proj_v1/screen/widgets/constant.dart';
-// import '../family_profile/family_profile_details.dart';
+import '../family_profile/family_profile_details.dart';
 import 'family_home_screen.dart';
 
 class FamilyHome extends StatefulWidget {
@@ -16,8 +16,7 @@ class _FamilyHomeState extends State<FamilyHome> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FamilyHomeScreen(),
-    FamilyHomeScreen(),
-    // FamilyProfileDetails(),
+    FamilyProfileDetails(),
   ];
 
   @override
@@ -25,8 +24,6 @@ class _FamilyHomeState extends State<FamilyHome> {
     return Scaffold(
       backgroundColor: kWhite,
       body: _widgetOptions.elementAt(_currentPage),
-      // Design bottomNavigationBar property with BottomNavigationBar widget: home, profile
-      // ADD CODE HERE.....
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int index) {
             setState(() {

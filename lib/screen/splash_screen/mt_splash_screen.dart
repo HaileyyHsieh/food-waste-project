@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kLightGrayColor,
+        backgroundColor: kWhite,
         body: Stack(
           alignment: Alignment.center,
           children: [
@@ -66,14 +66,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            // Container(
-            //   height: 630,
-            //   decoration: const BoxDecoration(
-            //     image: DecorationImage(
-            //       image: AssetImage('images/white.jpg'),
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

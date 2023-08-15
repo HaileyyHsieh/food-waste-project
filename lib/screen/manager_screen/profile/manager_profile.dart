@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../firebase/db.dart';
 import '../../widgets/constant.dart';
 import '../../widgets/icons.dart';
+import '../../../firebase/authentication.dart';
+import '../../welcome_screen/welcome_screen.dart';
 
 class ManagerProfile extends StatefulWidget {
   const ManagerProfile({Key? key}) : super(key: key);
@@ -13,11 +15,9 @@ class ManagerProfile extends StatefulWidget {
 class _ManagerProfileState extends State<ManagerProfile> {
   Map<String, dynamic> info = {};
 
-  // Create 3 TextEditingController variables: _addressController, _phoneController, _nameController
-  // ADD CODE HERE....
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
 
   @override
@@ -28,13 +28,6 @@ class _ManagerProfileState extends State<ManagerProfile> {
 
   // Gets user information from Firestore and sets the controllers' text to the value if the key exists
   _getData() async {
-    // Create a temp variable and call getUserInfo() function from db.dart. Add a setState function and
-    // set info = temp, then check if the info variable contains each key (phone, name, address). You can
-    // do so by using the containsKey function, which returns T/F (e.g. info.containsKey('phone') ). If
-    // info does contain that key, then set the corresponding TextEditingController variable's text
-    // to the info variable's key (e.g. info['phone']).
-    // ADD CODE HERE.......
-
     Map<String, dynamic> temp = await getUserInfo();
     setState(() {
       info = temp;
@@ -58,24 +51,15 @@ class _ManagerProfileState extends State<ManagerProfile> {
       currentFocus.unfocus();
     }
 
-    // Set each key (phone, name, address) in the info variable to the corresponding
-    // TextEditingController text. Then, call the buildLoading function. Next, call the
-    // editUserInfo function from db.dart. Add a .then function that hides the keyboard
-    // (Navigator.of(context).pop();) and call the snapBarBuilder function with the string
-    // 'User Information updated.'
-    // ADD CODE HERE......
-
     info['address'] = _addressController.text;
     info['phone'] = _phoneController.text;
     info['name'] = _nameController.text;
 
     buildLoading();
-    editUserInfo(info).then(
-      (value){
+    editUserInfo(info).then((value){
         Navigator.of(context).pop();
         snapBarBuilder('User Information updated');
-      }
-    );
+    });
   }
 
   // Loads a circular progress indicator in the center of the page
@@ -107,27 +91,18 @@ class _ManagerProfileState extends State<ManagerProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kDarkWhite,
-        // Add appbar property and design app bar
-        // ADD CODE HERE......
-
         appBar: AppBar(
           title: Image.asset(
             'images/school.png',
-            height: 100,
-            width: 100,
+            height: 120,
+            width: 120,
           ),
           toolbarHeight: 180,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: kDarkWhite,
+          elevation: 0,
           centerTitle: true,
           automaticallyImplyLeading: false,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30.0),
-              bottomRight: Radius.circular(30.0),
-            ),
-          ),
         ),
-
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: SingleChildScrollView(
@@ -136,11 +111,6 @@ class _ManagerProfileState extends State<ManagerProfile> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Add 3 TextFormField widgets: school name, school address, school phone number and
-                // add a 'Add' button using the Button widget from icons.dart file, when button is pressed
-                // call _updateProfile function
-                // ADD CODE HERE.....
-
                 TextFormField(
                   controller: _nameController,
                   keyboardType: TextInputType.name,
@@ -180,6 +150,22 @@ class _ManagerProfileState extends State<ManagerProfile> {
                   buttonText: "Add",
                   textColor: kWhite,
                   onPressed: _updateProfile,
+                ),
+                Button(
+                  containerBg: kPrimaryColor,
+                  borderColor: kLightGrayColor,
+                  buttonText: "Sign out",
+                  textColor: kWhite,
+                  onPressed: () {
+                    AuthenticationHelper().signOut().then((value) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WelcomeScreen(),
+                        ),
+                      );
+                    });
+                  }
                 ),
               ],
             ),

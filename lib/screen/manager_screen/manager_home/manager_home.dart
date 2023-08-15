@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:food_waste_proj_v1/screen/manager_screen/add_items/voteFood.dart';
-// import 'package:tracking_food_wasting/screen/manager_screen/manager_home/manager_home_screen.dart';
-// import 'package:tracking_food_wasting/screen/widgets/constant.dart';
-// import '../add_items/donate_food.dart';
+import 'package:food_waste_proj_v1/screen/manager_screen/manager_home/manager_home_screen.dart';
+import '../add_items/donate_food.dart';
 import '../profile/manager_profile.dart';
 import '../../widgets/constant.dart';
 
@@ -18,12 +16,9 @@ class _ManagerHomeState extends State<ManagerHome> {
   int _currentPage = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    // ManagerHomeScreen(),
+    ManagerHomeScreen(),
     VoteFood(),
-    // DonateFood(),
-    ManagerProfile(),
-    // ManagerProfile(),
-    ManagerProfile(),
+    DonateFood(),
     ManagerProfile(),
   ];
 
@@ -32,9 +27,6 @@ class _ManagerHomeState extends State<ManagerHome> {
     return Scaffold(
       backgroundColor: kWhite,
       body: _widgetOptions.elementAt(_currentPage),
-      // Design bottomNavigationBar property with BottomNavigationBar widget: home, vote, food, profile
-      // ADD CODE HERE.....
-
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) {
           setState(() {
