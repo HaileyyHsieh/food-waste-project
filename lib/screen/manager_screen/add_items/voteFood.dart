@@ -93,23 +93,61 @@ class _VoteFoodState extends State<VoteFood> {
                     // when tapped.
                     // ADD CODE HERE.......
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text("Select Image"),
+                        const Text(
+                          "Select Image",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )
+                        ),
                         GestureDetector(
                           onTap: () => finish(context),
                           child: const Icon(Icons.cancel),
                         ),
                       ],
                     ),
+                    const SizedBox(height: 15.0),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        GestureDetector(
-                          onTap: () => imgFromCamera(),
-                          child: const Icon(Icons.camera_enhance_rounded),
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () => imgFromCamera(),
+                              child: const Icon(
+                                Icons.camera_enhance_rounded,
+                                size: 40,
+                                color: kPrimaryColor,
+                              ),
+                            ),
+                            const SizedBox(height: 15.0),
+                            const Text(
+                              "Take Photo",
+                              style: TextStyle(
+                                color: kPrimaryColor,
+                              )
+                            ),
+                          ],
                         ),
-                        GestureDetector(
-                            onTap: () => _imgFromGallery(),
-                            child: const Icon(Icons.image)
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () => _imgFromGallery(),
+                              child: const Icon(
+                                Icons.image,
+                                size: 40,
+                                color: kLightGrayColor,
+                              )
+                            ),
+                            const SizedBox(height: 10.0),
+                            const Text(
+                              "Photo Gallery",
+                              style: TextStyle(
+                                color: kLightGrayColor,
+                              )
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -173,20 +211,38 @@ class _VoteFoodState extends State<VoteFood> {
                     // top of the image container and use a GestureDetector on the camera icon that will call the
                     // showImagePopup function when tapped).
                     // ADD CODE HERE......
+                    Image.asset(
+                      "images/addItem.png",
+                      height: 100,
+                    ),
+                    const SizedBox(height: 15.0),
                     TextField(
                       controller: itemController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        // border: OutlineInputBorder(),
                         labelText: "Please type the item name",
                       )
                     ),
+                    const SizedBox(height: 15.0),
                     Stack(
+                      alignment: Alignment.bottomRight,
                       children: <Widget>[
                         imageBuilder(),
-                        Icon(Icons.camera_enhance_rounded),
+                        Icon(
+                          Icons.camera_enhance_rounded,
+                          color: kPrimaryColor,
+                        ),
                         GestureDetector(
                           onTap: () => showImagePopup(),
-                          child: Icon(Icons.camera_enhance_rounded),
+                          child: Container(
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: kWhite,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: kPrimaryColor),
+                            ),
+                            child: Icon(Icons.camera_enhance_rounded),
+                          )
                         ),
                       ]
                     )
@@ -300,9 +356,25 @@ class _VoteFoodState extends State<VoteFood> {
                   // Return a ListTile widget and design it to display the vote item image (foodMap[key]['image']!)
                   // and vote item name (foodMap[key]['item']!).
                   // ADD CODE HERE....
-                  return ListTile(
-                    leading: Image.network(foodMap[key]['image']!),
-                    title: Text(foodMap[key]['item']!)
+                  return Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: kWhite,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: kBorderColorTextField),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: kDarkWhite,
+                          blurRadius: 4.0,
+                          spreadRadius: 2.0,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      leading: Image.network(foodMap[key]['image']!),
+                      title: Text(foodMap[key]['item']!)
+                    ),
                   );
                 },
               )
@@ -314,6 +386,7 @@ class _VoteFoodState extends State<VoteFood> {
       // the 'Add Item' button. For the onPressed property, write '_addItemBuilder(context);'.
       // ADD CODE HERE.......
       floatingActionButton: FloatingActionButton(
+        backgroundColor: kPrimaryColor,
         onPressed: () {
           _addItemBuilder(context);
         },

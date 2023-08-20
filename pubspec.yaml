@@ -77,17 +77,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/food_waste_icon.png
-    - images/arrow.png
-    - images/family.png
-    - images/school-manager.png
-    - images/student.png
-    - images/profile1.png
-    - images/profile2.png
-    - images/profile3.png
-    - images/school.png
-    - images/vote.png
-    - images/foodLogo.png
+    - images/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

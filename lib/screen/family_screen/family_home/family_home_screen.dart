@@ -28,7 +28,12 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     // then call the setState function and if foodLog contains the formatted key, then set foodMap to
     // `foodLog[formatted]`.
     // ADD CODE HERE.....
-
+    Map foodLog = await getFood();
+    setState(() {
+      if (foodLog.containsKey(formatted)) {
+        foodMap = foodLog[formatted];
+      }
+    });
   }
 
   @override
@@ -37,6 +42,23 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
       backgroundColor: kDarkWhite,
       // Design app bar. It can just be a simple bar with an image in the center and the bgColor set.
       // ADD CODE HERE.....
+      appBar: AppBar(
+        title: Image.asset(
+          'images/foodLogo.png',
+          height: 100,
+          width: 100,
+        ),
+        toolbarHeight: 70,
+        backgroundColor: kPrimaryColor,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.only(
+        //     bottomLeft: Radius.circular(30.0),
+        //     bottomRight: Radius.circular(30.0),
+        // ),
+        // ),
+      ),
 
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0),
@@ -60,7 +82,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
               children: [
                 // Design a nice title for the page.
                 // ADD CODE HERE......
-
+                Text('Food Items'),
                 ListView.builder(
                   itemCount: foodMap.length,
                   physics: const NeverScrollableScrollPhysics(),
@@ -72,7 +94,11 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                     // should include the food name (key), the image (foodMap[key]['image']), and the quantity
                     // (foodMap[key]['quantity']).
                     // ADD CODE HERE.....
-                    
+                    return ListTile(
+                      title: foodMap[key],
+                      leading: (foodMap[key]['image']),
+                      trailing: (foodMap[key]['quantity']),
+                    );
                   },
                 )
               ],
