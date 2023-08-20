@@ -92,7 +92,7 @@ class _LogInState extends State<LogIn> {
                     textInputAction: TextInputAction.next,
                     controller: _passwordController,
                     keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
+                    obscureText: hidePassword,
                     decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         labelText: 'Password',
