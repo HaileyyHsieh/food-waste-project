@@ -56,10 +56,10 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
     // (`Navigator.of(context).pop();`) and call the snapBarBuilder function with a message that
     // lets the user know that their info was updated.
     // ADD CODE HERE......
-    widget.info['address'] = _addressController;
-    widget.info['phone'] = _phoneController;
-    widget.info['firstName'] = _firstNameController;
-    widget.info['lastName'] = _lastNameController;
+    widget.info['address'] = _addressController.text;
+    widget.info['phone'] = _phoneController.text;
+    widget.info['firstName'] = _firstNameController.text;
+    widget.info['lastName'] = _lastNameController.text;
     buildLoading();
     editUserInfo(widget.info).then((value){
       Navigator.of(context).pop();
@@ -156,14 +156,8 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                     ),
                     TextFormField (
                       controller: _firstNameController,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: 'First Name',
-                          hintText: 'Enter first name'
-                      ),
-                    ),
-                    TextFormField (
-                      controller: _firstNameController,
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText: 'First Name',
@@ -172,6 +166,8 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                     ),
                     TextFormField (
                       controller: _lastNameController,
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText: 'Last Name',
@@ -180,6 +176,8 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                     ),
                     TextFormField (
                       controller: _phoneController,
+                      keyboardType: TextInputType.phone,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText: 'Phone Number',
@@ -188,13 +186,14 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                     ),
                     TextFormField (
                       controller: _addressController,
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText: 'Address',
                           hintText: 'Enter your address'
                       ),
                     ),
-                    
                   ],
                 ),
               ],
@@ -210,7 +209,9 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
           buttontext:"update profile",
           buttonDecoration: kButtonDecoration,
           buttonTextColor: kWhite,
-          onPressed: _updateProfile(),
+          onPressed: () {
+            _updateProfile() ;
+          },
       ),
     );
   }

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../welcome_screen/signup.dart';
-
 import '../welcome_screen/welcome_screen.dart';
 import '../widgets/constant.dart';
 
@@ -119,7 +117,6 @@ class _OnBoardState extends State<OnBoard> {
                                           const Duration(microseconds: 3000),
                                       curve: Curves.bounceInOut)
                                   :
-                                  // Text("");
                               Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -161,53 +158,5 @@ class _OnBoardState extends State<OnBoard> {
         ),
       ),
     );
-  }
-}
-
-class BottomShapeClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path_0 = Path();
-    // path.lineTo(0.0, size.height);
-    // path.lineTo(size.width, size.height);
-    // path.lineTo(size.width, 0.0);
-    // path.lineTo(0.0, size.height - 300);
-    // path.quadraticBezierTo(
-    //   size.width / 2,
-    //   size.height / 2,
-    //   size.width,
-    //   size.height - 300,
-    // );
-    path_0.moveTo(size.width * 0.09109896, size.height * 0.05714286);
-    path_0.cubicTo(
-        size.width * 0.09109896,
-        size.height * 0.05714286,
-        size.width * 0.08902899,
-        size.height * 0.1457143,
-        size.width * 0.2287578,
-        size.height * 0.1523810);
-    path_0.cubicTo(
-        size.width * 0.4402692,
-        size.height * 0.1624724,
-        size.width * 0.5516894,
-        size.height * 0.1628571,
-        size.width * 0.7162588,
-        size.height * 0.1523810);
-    path_0.cubicTo(
-        size.width * 0.8773395,
-        size.height * 0.1421269,
-        size.width * 0.8673747,
-        size.height * 0.05714286,
-        size.width * 0.8673747,
-        size.height * 0.05714286);
-    path_0.lineTo(size.width * 0.8673747, size.height * 0.8514286);
-    path_0.lineTo(size.width * 0.09109896, size.height * 0.8514286);
-    path_0.lineTo(size.width * 0.09109896, size.height * 0.05714286);
-    return path_0;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

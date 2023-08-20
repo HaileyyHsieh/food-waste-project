@@ -6,6 +6,8 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../widgets/constant.dart';
 import 'family_edit_profile_details.dart';
+import '../../../firebase/authentication.dart';
+import '../../welcome_screen/welcome_screen.dart';
 
 class FamilyProfileDetails extends StatefulWidget {
   const FamilyProfileDetails({Key? key}) : super(key: key);
@@ -23,10 +25,6 @@ class _FamilyProfileDetailsState extends State<FamilyProfileDetails> {
     _getData();
   }
 
-  // Create _getData() function, make it an `async` function. Inside create a temp variable that
-  // calls getUserInfo() from db.dart (make sure to put `await` in front). Use a
-  // setState() function and set the info variable to the temp variable.
-  // ADD CODE HERE..........
   _getData() async {
     Map<String,dynamic> temp = await getUserInfo();
     setState(() {
@@ -39,6 +37,7 @@ class _FamilyProfileDetailsState extends State<FamilyProfileDetails> {
     return Scaffold(
       backgroundColor: kDarkWhite,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: kDarkWhite,
         elevation: 0,
         iconTheme: const IconThemeData(color: kNeutralColor),
@@ -48,13 +47,22 @@ class _FamilyProfileDetailsState extends State<FamilyProfileDetails> {
               color: kNeutralColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: (){
+                AuthenticationHelper().signOut().then((value) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WelcomeScreen(),
+                    ),
+                  );
+                });
+              },
+              icon: Icon(Icons.logout_outlined, color: kPrimaryColor,)
+          )
+        ],
       ),
-      // Create an edit profile button. First, set the bottomNavigationBar property and use the ButtonGlobalWithIcon
-      // widget from button_global.dart to create the 'edit profile button'. When this button is clicked,
-      // call setState function and inside use the FamilyEditProfile widget (don't forget to pass the
-      // required key). Then, attach `.launch(context).then((value) => _getData());` to the FamilyEditProfile
-      // widget.
-      // ADD CODE HERE.....
       bottomNavigationBar: ButtonGlobalWithIcon(
         buttonIcon: Icons.edit,
         buttontext: "edit profile",
@@ -68,16 +76,6 @@ class _FamilyProfileDetailsState extends State<FamilyProfileDetails> {
           });
         },
       ),
-      // Set the body property and design the profile info page for the user. First check if the `info.isNotEmpty`
-      // (using shorthand if/else: info.isNotEmpty ? (code for when true) : (code from when false)), then design
-      // the profile info (you can get each field you need by using the info variable, for example, `info['firstName']`).
-      // Else if the info is empty, you will just add
-      // Center(
-      //     child: Column(children: const [
-      //     CircularProgressIndicator(),
-      //     Text('Loading User information')
-      //  ])),
-      // ADD CODE HERE......
       body: info.isNotEmpty?
         Padding(
           padding: const EdgeInsets.all(8.0),

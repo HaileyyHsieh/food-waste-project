@@ -29,28 +29,20 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
   }
 
   getData() async {
-    // Map tempVoteLog = await getVote(); // gets vote document
-    await getVote().then((data) {
-      Map tempVoteLog = data;
+    Map tempVoteLog = await getVote(); // gets vote document
+    List<String> tempStaticsPeriod = [];
 
-      List<String> tempStaticsPeriod = [];
-      print("tempVoteLog: $tempVoteLog");
-      tempVoteLog.forEach((date, items) { // queries through the vote doc and saves each date in tempStaticsPeriod array
-        print("date: $date");
-        print("items: $items");
-        tempStaticsPeriod.add(date);
-      });
-      print("dates");
-      print(tempStaticsPeriod);
-      setState(() {
-        staticsPeriod = tempStaticsPeriod; // list of statistics date in vote
-        staticsPeriod.sort((a, b) => b.compareTo(a));
-        if (staticsPeriod!.isNotEmpty) {
-          selectedStaticsPeriod = staticsPeriod[0]; // sets the selected statistics date
-          voteLog = tempVoteLog; // saves vote doc in voteLog
-          updateData();
-        }
-      });
+    tempVoteLog.forEach((date, items) { // queries through the vote doc and saves each date in tempStaticsPeriod array
+      tempStaticsPeriod.add(date);
+    });
+    setState(() {
+      staticsPeriod = tempStaticsPeriod; // list of statistics date in vote
+      staticsPeriod.sort((a, b) => b.compareTo(a));
+      if (staticsPeriod!.isNotEmpty) {
+        selectedStaticsPeriod = staticsPeriod[0]; // sets the selected statistics date
+        voteLog = tempVoteLog; // saves vote doc in voteLog
+        updateData();
+      }
     });
   }
 
@@ -100,20 +92,16 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: kDarkWhite,
-      // Design app bar can you listTile widget to add leading and title properties
+      backgroundColor: kWhite,
       appBar: AppBar(
         title: Text("voting statistics"),
-        leading: Image.asset('images/school.png'),
-        centerTitle: true,
-        backgroundColor: Colors.lightBlue,
-        toolbarHeight: 100,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30.0),
-            bottomRight: Radius.circular(30.0),
-          ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Image.asset('images/school.png'),
         ),
+        centerTitle: true,
+        backgroundColor: kPrimaryColor,
+        toolbarHeight: 100,
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 15.0),
@@ -131,42 +119,48 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Design a container section to display the vote statistics, which will include a title and dropdown menu on one line
-                  // and a circle chart with it's key to read the chart below (if dataMap.isNotEmpty, you will use the RecordStatistics widget
-                  // from chart.dart to display the chart, else you will use a SizedBox widget and display the text 'no data'.
-                  // ADD CODE HERE......
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
                       color: kDarkWhite,
                     ),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text("voting statistics",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-
-                              child: DropdownButtonHideUnderline(
-                                child: getStatisticsPeriod(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("voting statistics",
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ],
-                        ),
-                        dataMap.isNotEmpty ?
-                        RecordStatistics(dataMap:dataMap,colorList: colorList,) :
-                        SizedBox(child:Text("no data"),),
-                      ],
+                              const Spacer(),
+                              SizedBox(
+                                child: DropdownButtonHideUnderline(
+                                  child: getStatisticsPeriod(),
+                                ),
+                              ),
+                            ],
+                          ),
+                          dataMap.isNotEmpty ?
+                          RecordStatistics(dataMap:dataMap,colorList: colorList,) :
+                          SizedBox(
+                            child:Text(
+                                textAlign: TextAlign.center, "no data"),
+                            height: 150,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     )
                   ),
-
-
-                  // Design a container section to display the list of vote items information.
-                  // Use a ListView.builder widget to display each food picture, name, and number of votes.
-                  // ADD CODE HERE......
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     child: ListView.builder(
                         itemCount: voteMap.length,
@@ -175,9 +169,9 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
                         itemBuilder: (BuildContext context, int index){
                           String key = voteMap.keys.elementAt(index);
                           return ListTile(
-                            leading:Image.network(voteMap[key]['image']),
-                            title:Text('${voteMap[key]['item']}'),
-                            trailing:Text('${voteMap[key]['numberVote']}'),
+                              leading:Image.network(voteMap[key]['image']),
+                              title:Text('${voteMap[key]['item']}'),
+                              trailing:Text('${voteMap[key]['numberVote']}'),
                           );
                         }
                     ),
@@ -187,51 +181,5 @@ class _ManagerHomeScreenState extends State<ManagerHomeScreen> {
         ),
       ),
     ));
-  }
-}
-
-class ChartLegend extends StatelessWidget {
-  const ChartLegend({
-    Key? key,
-    required this.iconColor,
-    required this.title,
-    required this.value,
-  }) : super(key: key);
-
-  final Color iconColor;
-  final String title;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          Icons.circle,
-          size: 16.0,
-          color: iconColor,
-        ),
-        const SizedBox(width: 10.0),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: kTextStyle.copyWith(color: kSubTitleColor),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Text(
-              value,
-              style: kTextStyle.copyWith(
-                  color: kNeutralColor, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ],
-    );
   }
 }

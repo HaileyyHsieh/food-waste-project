@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:food_waste_proj_v1/screen/family_screen/family_profile/family_edit_profile_details.dart';
-import 'package:food_waste_proj_v1/screen/family_screen/family_profile/family_profile_details.dart';
-// import 'package:tracking_food_wasting/screen/welcome_screen/welcome_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../firebase/authentication.dart';
 import '../family_screen/family_home/family_home.dart';
 import '../manager_screen/manager_home/manager_home.dart';
-// import '../student_screen/student_home.dart';
+import '../student_screen/student_home.dart';
 import '../widgets/button_global.dart';
 import '../widgets/constant.dart';
 import '../welcome_screen/signup.dart';
-
-import '../manager_screen/add_items/voteFood.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
@@ -28,14 +23,12 @@ class _LogInState extends State<LogIn> {
   TextEditingController _passwordController = TextEditingController();
 
   void _navigateTo() {
-    // if (isManager)
-      // const ManagerHome().launch(context);
-    //   const VoteFood().launch(context);
-    // else if (isFamily)
-    //   const FamilyHome().launch(context);
-    // else
-    //   const StudentScreen().launch(context);
-    const FamilyProfileDetails().launch(context);
+    if (isManager)
+      const ManagerHome().launch(context);
+    else if (isFamily)
+      const FamilyHome().launch(context);
+    else
+      const StudentScreen().launch(context);
   }
 
   String _getRole() {

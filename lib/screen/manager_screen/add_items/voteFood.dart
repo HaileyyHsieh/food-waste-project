@@ -1,8 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -32,10 +29,6 @@ class _VoteFoodState extends State<VoteFood> {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formatted = formatter.format(now); // formatted date
 
-    // Create a voteLog variable and assign the getVote function from db.dart. Then,
-    // use a setState function and check if voteLog contains the formatted date key.
-    // If so, set the foodMap variable to voteLog[formatted].
-    // ADD CODE HERE.....
     Map voteLog = await getVote();
     setState(() {
       if(voteLog.containsKey(formatted)) {
@@ -85,69 +78,61 @@ class _VoteFoodState extends State<VoteFood> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Design the dialog. It should have a title (Select Image), an x button
-                    // that you can click on and cancel (use a GestureDetector widget and set
-                    // the onTap property to '() => finish(context),'. The dialog should also
-                    // have 2 more GestureDetector widgets, one that calls the imgFromCamera()
-                    // function when tapped and one that calls the _imgFromGallery() function
-                    // when tapped.
-                    // ADD CODE HERE.......
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Select Image",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          )
-                        ),
+                        const Text("Select Image"),
+                        const Spacer(),
                         GestureDetector(
                           onTap: () => finish(context),
                           child: const Icon(Icons.cancel),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 15.0),
+                    SizedBox(height: 20,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () => imgFromCamera(),
-                              child: const Icon(
+                        GestureDetector(
+                          onTap: () {
+                            imgFromCamera();
+                            Navigator.of(context).pop();
+                          },
+                          child: Column(
+                            children: [
+                              const Icon(
                                 Icons.camera_enhance_rounded,
-                                size: 40,
                                 color: kPrimaryColor,
+                                size: 40,
                               ),
-                            ),
-                            const SizedBox(height: 15.0),
-                            const Text(
-                              "Take Photo",
-                              style: TextStyle(
-                                color: kPrimaryColor,
-                              )
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
+                              const SizedBox(height: 10.0),
+                              Text(
+                                'Take Photo',
+                                style: kTextStyle.copyWith(
+                                color: kPrimaryColor),
+                              ),
+                            ],
+                          ),
+                          ),
                             GestureDetector(
-                              onTap: () => _imgFromGallery(),
-                              child: const Icon(
-                                Icons.image,
-                                size: 40,
-                                color: kLightGrayColor,
-                              )
+                            onTap: () {
+                              _imgFromGallery();
+                              Navigator.of(context).pop();
+                            },
+                            child: Column(
+                              children: [
+                                const Icon(
+                                  Icons.image,
+                                  color: kLightNeutralColor,
+                                  size: 40,
+                                ),
+                                const SizedBox(height: 10.0),
+                                Text(
+                                  'Photo Gallery',
+                                  style:
+                                  kTextStyle.copyWith(color: kLightNeutralColor),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 10.0),
-                            const Text(
-                              "Photo Gallery",
-                              style: TextStyle(
-                                color: kLightGrayColor,
-                              )
-                            ),
-                          ],
                         ),
                       ],
                     ),
@@ -182,7 +167,7 @@ class _VoteFoodState extends State<VoteFood> {
                   );
           }
 
-          // function that calls the imagePopupDialog() to display on the screen
+          // Function that calls the imagePopupDialog() to display on the screen
           void showImagePopup() {
             showDialog(
               barrierDismissible: false,
@@ -205,44 +190,33 @@ class _VoteFoodState extends State<VoteFood> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // Design the initial dialog that will have a text field that asks the user to type the item
-                    // name, have a image container with a clickable camera icon at the corner, so that the user
-                    // can upload/select the item's photo (use a Stack widget to have the camera icon stack on
-                    // top of the image container and use a GestureDetector on the camera icon that will call the
-                    // showImagePopup function when tapped).
-                    // ADD CODE HERE......
-                    Image.asset(
-                      "images/addItem.png",
-                      height: 100,
-                    ),
-                    const SizedBox(height: 15.0),
+                    Image.asset('images/addFood.png', height: 100),
                     TextField(
                       controller: itemController,
                       decoration: InputDecoration(
-                        // border: OutlineInputBorder(),
-                        labelText: "Please type the item name",
+                        labelText: "item name",
                       )
                     ),
-                    const SizedBox(height: 15.0),
+                    SizedBox(height: 20,),
                     Stack(
                       alignment: Alignment.bottomRight,
                       children: <Widget>[
                         imageBuilder(),
-                        Icon(
-                          Icons.camera_enhance_rounded,
-                          color: kPrimaryColor,
-                        ),
                         GestureDetector(
                           onTap: () => showImagePopup(),
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
+                          child:Container(
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               color: kWhite,
                               shape: BoxShape.circle,
                               border: Border.all(color: kPrimaryColor),
                             ),
-                            child: Icon(Icons.camera_enhance_rounded),
-                          )
+                            child: const Icon(
+                              Icons.camera_enhance_rounded,
+                              color: kPrimaryColor,
+                              size: 18,
+                            ),
+                          ),
                         ),
                       ]
                     )
@@ -250,11 +224,6 @@ class _VoteFoodState extends State<VoteFood> {
                 ),
               ),
             ),
-            // Set the actions property and add 2 TextButton widgets. One for canceling changes ( you can
-            // write 'Navigator.of(context).pop();' for the onPressed property) and one for actually adding
-            // the vote item (you can write 'uploadVoteOption(image, itemController.text);' for the onPressed
-            // property).
-            // ADD CODE HERE.....
             actions: [
               TextButton(
                 onPressed: () {
@@ -307,8 +276,6 @@ class _VoteFoodState extends State<VoteFood> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kDarkWhite,
-      // Design the appbar (you can add a food image in the center and set the background color)
-      // ADD CODE HERE.....
       appBar: AppBar(
         title: Image.asset(
           'images/vote.png',
@@ -319,12 +286,6 @@ class _VoteFoodState extends State<VoteFood> {
         backgroundColor: kPrimaryColor,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        // shape: const RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.only(
-        //     bottomLeft: Radius.circular(30.0),
-        //     bottomRight: Radius.circular(30.0),
-          // ),
-        // ),
       ),
 
       body: Container(
@@ -353,24 +314,7 @@ class _VoteFoodState extends State<VoteFood> {
                 padding: const EdgeInsets.only(bottom: 10.0),
                 itemBuilder: (_, index) {
                   String key = foodMap.keys.elementAt(index);
-                  // Return a ListTile widget and design it to display the vote item image (foodMap[key]['image']!)
-                  // and vote item name (foodMap[key]['item']!).
-                  // ADD CODE HERE....
-                  return Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: kWhite,
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(color: kBorderColorTextField),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: kDarkWhite,
-                          blurRadius: 4.0,
-                          spreadRadius: 2.0,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
+                  return Card(
                     child: ListTile(
                       leading: Image.network(foodMap[key]['image']!),
                       title: Text(foodMap[key]['item']!)
@@ -382,14 +326,11 @@ class _VoteFoodState extends State<VoteFood> {
           ),
         ),
       ),
-      // Set the floatingActionButton property to a FloatingActionButton widget and design
-      // the 'Add Item' button. For the onPressed property, write '_addItemBuilder(context);'.
-      // ADD CODE HERE.......
       floatingActionButton: FloatingActionButton(
-        backgroundColor: kPrimaryColor,
         onPressed: () {
           _addItemBuilder(context);
         },
+        backgroundColor: kPrimaryColor,
         child: Icon(Icons.add),
       ),
     );

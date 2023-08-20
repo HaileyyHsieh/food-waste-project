@@ -29,11 +29,13 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     // `foodLog[formatted]`.
     // ADD CODE HERE.....
     Map foodLog = await getFood();
+
     setState(() {
       if (foodLog.containsKey(formatted)) {
         foodMap = foodLog[formatted];
       }
     });
+
   }
 
   @override
@@ -43,23 +45,13 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
       // Design app bar. It can just be a simple bar with an image in the center and the bgColor set.
       // ADD CODE HERE.....
       appBar: AppBar(
-        title: Image.asset(
-          'images/foodLogo.png',
-          height: 100,
-          width: 100,
-        ),
-        toolbarHeight: 70,
-        backgroundColor: kPrimaryColor,
-        centerTitle: true,
         automaticallyImplyLeading: false,
-        // shape: const RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.only(
-        //     bottomLeft: Radius.circular(30.0),
-        //     bottomRight: Radius.circular(30.0),
-        // ),
-        // ),
+        backgroundColor: kDarkWhite,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: kNeutralColor),
+        title: Image.asset('images/foodLogo.png'),
+        centerTitle: true,
       ),
-
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: Container(
@@ -82,7 +74,12 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
               children: [
                 // Design a nice title for the page.
                 // ADD CODE HERE......
-                Text('Food Items'),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text('Available Meals ', style: Theme.of(context).textTheme.headlineMedium,),
+                ),
+                Container(height: 2, color: kPrimaryColor,),
+                const SizedBox(height: 20.0),
                 ListView.builder(
                   itemCount: foodMap.length,
                   physics: const NeverScrollableScrollPhysics(),
@@ -95,9 +92,18 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                     // (foodMap[key]['quantity']).
                     // ADD CODE HERE.....
                     return ListTile(
-                      title: foodMap[key],
-                      leading: (foodMap[key]['image']),
-                      trailing: (foodMap[key]['quantity']),
+                      leading: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(foodMap[key]['image']),
+                              fit: BoxFit.cover),
+                        ),
+                      ),
+                      title: Text(key),
+                      subtitle: Text('Quantities: ${foodMap[key]['quantity']}')
                     );
                   },
                 )

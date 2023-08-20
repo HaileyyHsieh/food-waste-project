@@ -3,9 +3,9 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:food_waste_proj_v1/firebase/db.dart';
 import 'package:food_waste_proj_v1/screen/widgets/button_global.dart';
 import '../../firebase/authentication.dart';
-// import '../family_screen/family_home/family_home.dart';
-// import '../manager_screen/manager_home/manager_home.dart';
-// import '../student_screen/student_home.dart';
+import '../family_screen/family_home/family_home.dart';
+import '../manager_screen/manager_home/manager_home.dart';
+import '../student_screen/student_home.dart';
 import '../widgets/constant.dart';
 import '../welcome_screen/login.dart';
 
@@ -26,13 +26,13 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _lastNameController = TextEditingController();
 
   void _navigateTo() {
-    // if (isManager) {
-    //   const ManagerHome().launch(context);
-    // } else if (isFamily) {
-    //   const FamilyHome().launch(context);
-    // } else {
-    //   const StudentScreen().launch(context);
-    // }
+    if (isManager) {
+      const ManagerHome().launch(context);
+    } else if (isFamily) {
+      const FamilyHome().launch(context);
+    } else {
+      const StudentScreen().launch(context);
+    }
   }
 
   String _getRole() {

@@ -66,14 +66,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            // Container(
-            //   height: 630,
-            //   decoration: const BoxDecoration(
-            //     image: DecorationImage(
-            //       image: AssetImage('images/white.jpg'),
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),
