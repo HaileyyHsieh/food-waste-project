@@ -44,17 +44,24 @@ class _StudentScreenState extends State<StudentScreen> {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formatted = formatter.format(now); // formatted date for today
 
-    if (userInfo.containsKey('vote') || userInfo['vote'] != now) {
-      userVote({formatted: foodOptions});
+    if (!userInfo.containsKey('vote') || userInfo['vote'] != formatted) {
+      Map<String, dynamic> data = {formatted: foodOptions};
+      userVote(data);
       userInfo['vote'] = formatted;
-      editUserInfo(userInfo).then((value) =>
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-            'You already vote',
-            style: const TextStyle(fontSize: 16),
-          ),
-      ))
-      );
+      editUserInfo(userInfo).then(
+              (value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+              'Your vote was added',
+              style: TextStyle(fontSize: 16),
+            ),
+          )));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+          'You already vote',
+          style: const TextStyle(fontSize: 16),
+        ),
+      ));
     }
   }
 
@@ -104,8 +111,22 @@ class _StudentScreenState extends State<StudentScreen> {
                     String key = foodOptions.keys.elementAt(index);
                    return Card(
                       child: RadioListTile(
-                        title: foodOptions[key]['item'],
-                        secondary: foodOptions[key]['image'],
+                        title: Text(foodOptions[key]['item']),
+                        secondary: Container(
+                          height: 45,
+                          width: 45,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFCCF2E3),
+                            borderRadius: BorderRadius.circular(3.0),
+                            image: DecorationImage(
+                                image:
+                                NetworkImage(foodOptions[key]['image']),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        autofocus: false,
+                        activeColor: Colors.green,
+                        selectedTileColor: Colors.white,
                         value: foodOptions[key]['item'],
                         groupValue: _food,
                         onChanged: (value) {
@@ -117,15 +138,15 @@ class _StudentScreenState extends State<StudentScreen> {
                       )
                     );
                   }),
-
+              const SizedBox(height: 15.0),
               ButtonGlobalWithoutIcon(
                 buttontext: "Vote",
                 buttonDecoration:  kButtonDecoration.copyWith(
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.circular(10)
                 ),
-                onPressed: vote(),
-                buttonTextColor: kPrimaryColor
+                onPressed: vote,
+                buttonTextColor: kWhite
               )
             ],
           ),
