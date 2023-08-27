@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:food_waste_proj_v1/screen/widgets/constant.dart';
 import '../../firebase/db.dart';
 import '../widgets/button_global.dart';
+import '../../firebase/authentication.dart';
+import '../welcome_screen/welcome_screen.dart';
 
 class StudentScreen extends StatefulWidget {
   const StudentScreen({Key? key}) : super(key: key);
@@ -78,6 +80,7 @@ class _StudentScreenState extends State<StudentScreen> {
           ),
           toolbarHeight: 130,
           backgroundColor: kPrimaryColor,
+          automaticallyImplyLeading: false,
           centerTitle: true,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -147,7 +150,25 @@ class _StudentScreenState extends State<StudentScreen> {
                 ),
                 onPressed: vote,
                 buttonTextColor: kWhite
-              )
+              ),
+              ButtonGlobalWithoutIcon(
+                  buttontext: "Sign out",
+                  buttonDecoration:  kButtonDecoration.copyWith(
+                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  onPressed: () {
+                    AuthenticationHelper().signOut().then((value) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WelcomeScreen(),
+                        ),
+                      );
+                    });
+                  },
+                  buttonTextColor: kWhite
+              ),
             ],
           ),
         ),
