@@ -44,23 +44,17 @@ class _StudentScreenState extends State<StudentScreen> {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formatted = formatter.format(now); // formatted date for today
 
-    // Check if userInfo doesn't contain the key 'vote' or userInfo['vote'] is not is equal to today's date, then call the
-    // userVote function from db.dart and pass in `{formatted: foodOptions}` and set userInfo['vote'] to today's date. Call the
-    // editUserInfo function from db.dart, add a .then function that uses the SnackBar widget to tell the user that their vote
-    // was added. Else show a SnackBar message that tells the user that they already voted. An example of how to show a Snack Bar is
-    // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-    //         content: Text(
-    //           'You already vote',
-    //           style: const TextStyle(fontSize: 16),
-    //         ),
-    //       ));
-    // ADD CODE HERE.......
     if (userInfo.containsKey('vote') || userInfo['vote'] != now) {
       userVote({formatted: foodOptions});
       userInfo['vote'] = formatted;
-      editUserInfo().then(
-
-      )
+      editUserInfo(userInfo).then((value) =>
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+            'You already vote',
+            style: const TextStyle(fontSize: 16),
+          ),
+      ))
+      );
     }
   }
 
@@ -69,8 +63,22 @@ class _StudentScreenState extends State<StudentScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kWhite,
-        // Design appbar: can use app bar from welcome_screen.dart and modify it (e.g. change height, bg color, etc)
-        // ADD CODE HERE......
+        appBar: AppBar(
+          title: Image.asset(
+            'images/food_waste_icon.png',
+            height: 100,
+            width: 100,
+          ),
+          toolbarHeight: 130,
+          backgroundColor: kPrimaryColor,
+          centerTitle: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0),
+            ),
+          ),
+        ),
 
         body: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -94,18 +102,31 @@ class _StudentScreenState extends State<StudentScreen> {
                   itemCount: foodOptions.length,
                   itemBuilder: (BuildContext context, int index) {
                     String key = foodOptions.keys.elementAt(index);
-                    // Design how each vote item will look. Return a Card widget with a RadioListTile widget as the child.
-                    // Each radio list tile will have a title to display the food item ( foodOptions[key]['item'] ) and
-                    // a secondary property with the food image set ( foodOptions[key]['image'] ). The value property will
-                    // be set to `foodOptions[key]['item']`, set group_value to `_food`, and for the onChanged property,
-                    // call the setState() function and add `_food = foodOptions[key]['item'];` and `foodIndex = index;`.
-                    // ADD CODE HERE.....
-
+                   return Card(
+                      child: RadioListTile(
+                        title: foodOptions[key]['item'],
+                        secondary: foodOptions[key]['image'],
+                        value: foodOptions[key]['item'],
+                        groupValue: _food,
+                        onChanged: (value) {
+                          setState(() {
+                            _food = foodOptions[key]['item'];
+                            foodIndex = index;
+                          });
+                        }
+                      )
+                    );
                   }),
 
-              // Add a vote button using the ButtonGlobalWithoutIcon widget and call the vote function on pressed.
-              // ADD CODE HERE......
-
+              ButtonGlobalWithoutIcon(
+                buttontext: "Vote",
+                buttonDecoration:  kButtonDecoration.copyWith(
+                    color: kPrimaryColor,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                onPressed: vote(),
+                buttonTextColor: kPrimaryColor
+              )
             ],
           ),
         ),
