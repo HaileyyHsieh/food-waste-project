@@ -135,25 +135,40 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                     // ADD CODE HERE....
                     Row(
                         children: [
-                          Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: kLightGrayColor),
-                              image: const DecorationImage(
-                                  image: AssetImage('images/profile2.png'),
-                              ),
-                            ),
+                          CircleAvatar(
+                            backgroundImage: AssetImage('images/profile2.png'),
+                            radius: 40,
                           ),
-                          Column(
-                            children: [
-                              Text("${_firstNameController.text} ${_lastNameController.text}"),
-                              Text(widget.info!['email']),
-                            ],
+                          // Container(
+                          //   width: 100,
+                          //   height: 100,
+                          //   decoration: BoxDecoration(
+                          //     shape: BoxShape.circle,
+                          //     border: Border.all(color: kLightGrayColor),
+                          //     image: const DecorationImage(
+                          //         image: AssetImage('images/profile2.png'),
+                          //     ),
+                          //   ),
+                          // ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${_firstNameController.text} ${_lastNameController.text}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(height: 4,),
+                                Text(widget.info!['email']),
+                              ],
+                            ),
                           ),
                         ],
                     ),
+                    const SizedBox(height: 30,),
                     TextFormField (
                       controller: _firstNameController,
                       keyboardType: TextInputType.name,
@@ -164,6 +179,7 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                           hintText: 'Enter first name'
                       ),
                     ),
+                    const SizedBox(height: 18,),
                     TextFormField (
                       controller: _lastNameController,
                       keyboardType: TextInputType.name,
@@ -174,6 +190,7 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                           hintText: 'Enter last name'
                       ),
                     ),
+                    const SizedBox(height: 18,),
                     TextFormField (
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
@@ -184,6 +201,7 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                           hintText: 'Enter phone number'
                       ),
                     ),
+                    const SizedBox(height: 18,),
                     TextFormField (
                       controller: _addressController,
                       keyboardType: TextInputType.name,
@@ -194,6 +212,7 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
                           hintText: 'Enter your address'
                       ),
                     ),
+                    const SizedBox(height: 18,),
                   ],
                 ),
               ],
@@ -210,7 +229,8 @@ class _FamilyEditProfileState extends State<FamilyEditProfile> {
           buttonDecoration: kButtonDecoration,
           buttonTextColor: kWhite,
           onPressed: () {
-            _updateProfile() ;
+            _updateProfile();
+            Navigator.pop(context);
           },
       ),
     );
