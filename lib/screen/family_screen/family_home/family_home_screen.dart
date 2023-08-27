@@ -78,7 +78,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: Text('Available Meals ', style: Theme.of(context).textTheme.headlineMedium,),
                 ),
-                Container(height: 2, color: kPrimaryColor,),
+                Container(height: 2, color: kLightGrayColor,),
                 const SizedBox(height: 20.0),
                 ListView.builder(
                   itemCount: foodMap.length,
@@ -91,19 +91,21 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                     // should include the food name (key), the image (foodMap[key]['image']), and the quantity
                     // (foodMap[key]['quantity']).
                     // ADD CODE HERE.....
-                    return ListTile(
-                      leading: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(foodMap[key]['image']),
-                              fit: BoxFit.cover),
+                    return Card(
+                      child: ListTile(
+                        leading: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(foodMap[key]['image']),
+                                fit: BoxFit.cover),
+                          ),
                         ),
+                        title: Text(key),
+                        subtitle: Text('Quantities: ${foodMap[key]['quantity']}')
                       ),
-                      title: Text(key),
-                      subtitle: Text('Quantities: ${foodMap[key]['quantity']}')
                     );
                   },
                 )

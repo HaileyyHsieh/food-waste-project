@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
     } else if (isFamily) {
       const FamilyHome().launch(context);
     } else {
-      const StudentScreen().launch(context);
+      // const StudentScreen().launch(context);
     }
   }
 

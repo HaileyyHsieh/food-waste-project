@@ -55,7 +55,13 @@ class _StudentScreenState extends State<StudentScreen> {
     //         ),
     //       ));
     // ADD CODE HERE.......
+    if (userInfo.containsKey('vote') || userInfo['vote'] != now) {
+      userVote({formatted: foodOptions});
+      userInfo['vote'] = formatted;
+      editUserInfo().then(
 
+      )
+    }
   }
 
   @override
@@ -99,7 +105,7 @@ class _StudentScreenState extends State<StudentScreen> {
 
               // Add a vote button using the ButtonGlobalWithoutIcon widget and call the vote function on pressed.
               // ADD CODE HERE......
-              
+
             ],
           ),
         ),

@@ -51,7 +51,7 @@ Future<bool> addVote(Map<String, dynamic> data) async {
 
 Future<Map> getFood() async {
   Map<String, dynamic> data = {};
-  FirebaseFirestore.instance.collection(collectionName).doc('food').get().then((DocumentSnapshot documentSnapshot) {
+  await FirebaseFirestore.instance.collection(collectionName).doc('food').get().then((DocumentSnapshot documentSnapshot) {
     if (documentSnapshot.exists){
       data = documentSnapshot.data() as Map<String, dynamic>;
     }else{
